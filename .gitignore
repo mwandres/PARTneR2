@@ -127,7 +127,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-Test_Runs/Test_01/fort.22
+Test_Runs/
 
 # Spyder project settings
 .spyderproject
