@@ -3,7 +3,7 @@ clear all;close all;
 %addpath(genpath('D:\Tools\OceanMesh2D\utilities'))
 %addpath('D:\Projects_SPC\Majuro\soft\Coupled_fullSp_Majuro')
 
-pathres='F:\Adcirc_SWAN\PARTneR2\Test_Runs\Test_02\';
+pathres='F:\Adcirc_SWAN\PARTneR2\Test_Runs\Test_02_b\';
 
 
 
@@ -21,13 +21,13 @@ cd(pathres);
 
 
 fid  = fopen('partmesh.sh','w');
-fprintf(fid,'%s','/cygdrive/c/adcirc_v54.02/build/adcprep.exe --np 16 --partmesh');
+fprintf(fid,'%s','/cygdrive/c/adcirc_v54.02/build/adcprep.exe --np 24 --partmesh');
 fprintf(fid,'\n');
-fprintf(fid,'%s','/cygdrive/c/adcirc_v54.02/build/adcprep.exe --np 16 --prepall');
+fprintf(fid,'%s','/cygdrive/c/adcirc_v54.02/build/adcprep.exe --np 24 --prepall');
 fclose(fid);
 
 
-system(['C:\cygwin64\bin\bash --login -c   "cd ','/cygdrive/f/Adcirc_SWAN/PARTneR2/Test_Runs/Test_02','; ./partmesh.sh"'])
+system(['C:\cygwin64\bin\bash --login -c   "cd ','/cygdrive/f/Adcirc_SWAN/PARTneR2/Test_Runs/Test_02_b','; ./partmesh.sh"'])
 %bry_folder = ['D:/Adcirc_SWAN/Funafuti_Hindcast/Waves/' num2str(y1),num2str(m1,'%02d')];
 % process_subdomain_wave_bnd(foldername,bry_folder)
 % if m1 ~= 1
@@ -35,7 +35,7 @@ system(['C:\cygwin64\bin\bash --login -c   "cd ','/cygdrive/f/Adcirc_SWAN/PARTne
 %     out_folder=foldername;
 %     copy_hotfiles(in_folder,out_folder)
 % end
-system(['C:\cygwin64\bin\bash --login -c   "cd ','/cygdrive/f/Adcirc_SWAN/PARTneR2/Test_Runs/Test_02','; mpirun -np 16 /cygdrive/f/Adcirc_SWAN/PARTneR2/ADCIRC55/ADCIRC55/padcswan_SH.exe"'])
+system(['C:\cygwin64\bin\bash --login -c   "cd ','/cygdrive/f/Adcirc_SWAN/PARTneR2/Test_Runs/Test_02_b','; mpirun -np 24 /cygdrive/f/Adcirc_SWAN/PARTneR2/ADCIRC55/ADCIRC55/padcswan_SH.exe"'])
 
 system('taskkill /F /IM padcswan_SH.exe')
 % system('rm -r PE*')

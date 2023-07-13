@@ -4,16 +4,17 @@ close all
 addpath('F:\Adcirc_SWAN\PARTneR2\Matlab_Codes\Codes')
 pathres_Runs='F:\Adcirc_SWAN\PARTneR2\Test_Runs\Test_03\';
 
-nc_fl_zeta = [pathres_Runs 'maxele.63.nc'];
-nc_fl_hs = [pathres_Runs 'swan_HS_max.63.nc'];
+nc_fl_zeta = [pathres_Runs 'fort.63.nc'];
+nc_fl_hs = [pathres_Runs 'swan_HS.63.nc'];
 filegrid=[pathres_Runs 'fort.14'];%% Grid file
 [fem,elebnd]=read_adcirc_mesh(filegrid);
-zeta_max = ncread(nc_fl_zeta,'zeta_max');
-hs_max = ncread(nc_fl_hs,'swan_HS_max');
+zeta_max = ncread(nc_fl_zeta,'zeta');
+hs_max = ncread(nc_fl_hs,'swan_HS');
 x = ncread([ nc_fl_zeta],'x');
 y = ncread([ nc_fl_zeta],'y');
-
+time = ncread([nc_fl_zeta],'time');
 %%
+for i =
 fsz = 12; % default font size
 bgc = [1 1 1]; % default background color
 figure

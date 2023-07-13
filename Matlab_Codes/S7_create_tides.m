@@ -3,11 +3,11 @@ clear all;close all;
 % addpath('D:\Tools\TMD_Matlab_Toolbox_v2.5\TMD');
 addpath('F:\Adcirc_SWAN\PARTneR2\Matlab_Codes\Codes\');
 
-pathres='F:\Adcirc_SWAN\PARTneR2\Test_Runs\Test_02\';
+pathres='F:\Adcirc_SWAN\PARTneR2\Test_Runs\Test_03\';
 filegrid=[pathres 'fort.14'];%% Grid file
 [tri,xyz,elebnd,flowbnd]=adcirc_leegrid(filegrid);
 
-time=[datenum('05-Apr-2020 00:00:00'):1/24/6:datenum('10-Apr-2020 13:00:00')];
+time=[datenum('11-Feb-2010 12:00:00'):1/24/6:datenum('18-Feb-2010 19:00:00')];
 bnd=vertcat(elebnd.eles);
 tide=ones(length(bnd),length(time));
 
