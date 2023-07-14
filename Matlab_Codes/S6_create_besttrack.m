@@ -2,7 +2,7 @@ clear all;close all;
 %%
 % addpath('D:\Tools\TMD_Matlab_Toolbox_v2.5\TMD');
 addpath('F:\Adcirc_SWAN\PARTneR2\Matlab_Codes\Codes\');
-pathres='F:\Adcirc_SWAN\PARTneR2\Test_Runs\Test_02_c\';
+pathres='F:\Adcirc_SWAN\PARTneR2\Test_Runs\Test_04\';
 filegrid=[pathres 'fort.14'];%% Grid file
 wind_in = ['F:\Adcirc_SWAN\PARTneR2\BestTrack\Harold_tonga.txt'];
 wind_out = [pathres 'fort.22'];
@@ -26,7 +26,7 @@ HURDATformat_gentrack(time,x,y,Pmin,Wind,Rmax,filename)
 function HURDATformat_gentrack(time,x,y,Pmin,Wind,Rmax,filename)
 fileID = fopen(filename,'w');
 for i=1:length(x)
-    format='SH, 01,%11s,   , BEST,   0,%4s,%5s,%4s,%5s,   ,    ,    ,     ,     ,     ,     , 1013,     ,%4s,    ,    ,    ,    ,    ,    ,    ,     Unnamed,  ,   ,    ,    ,    ,    ,   0\n';
+    format='SH, 01,%11s,   , BEST,   0, %4s, %5s,%4s,%5s,   ,    ,    ,     ,     ,     ,     , 1013,     ,%4s,    ,    ,    ,    ,    ,    ,    ,     Unnamed,  ,   ,    ,    ,    ,    ,   0\n';
     fprintf(fileID,format, datestr(time(i),'yyyymmddhh'),y{i},x{i},num2str(round(Wind(i))),num2str(round(Pmin(i))),num2str(round(Rmax(i))));
 %    fprintf(fileID,format, datestr(time(i),'yyyymmddhh'),num2str(round(y(i).*10)),num2str(round(x(i).*10)),num2str(round(Wind(i))),num2str(round(Pmin(i))),num2str(round(Rmax(i))));
 end

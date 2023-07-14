@@ -2,7 +2,7 @@ clear all
 close all
 %%
 addpath('F:\Adcirc_SWAN\PARTneR2\Matlab_Codes\Codes')
-pathres_Runs='F:\Adcirc_SWAN\PARTneR2\Test_Runs\Test_02\';
+pathres_Runs='F:\Adcirc_SWAN\PARTneR2\Test_Runs\Test_04\';
 
 nc_fl_zeta = [pathres_Runs 'fort.63.nc'];
 nc_fl_hs = [pathres_Runs 'swan_HS.63.nc'];
@@ -30,7 +30,7 @@ caxis([0 1.5])
 cmap = flipud(cbrewer('div','RdYlBu',[23]));
 colormap(cmap)
 c = colorbar;
-title(num2str(time(i)/3600))
+title(datestr(datenum(2020,4,7,time(i)/3600,0,0)))
 ylabel(c,'Zeta (m)')
 fileprint=[pathres_Runs 'zeta_' num2str(i)];
 print('-dpng','-r200',fileprint)
@@ -50,7 +50,8 @@ caxis([0 10])
 cmap = flipud(cbrewer('div','RdYlBu',[23]));
 colormap(cmap)
 c = colorbar;
-title(num2str(time(i)/3600))
+title(datestr(datenum(2020,4,7,time(i)/3600,0,0)))
+%title(num2str(time(i)/3600))
 ylabel(c,'Hs (m)')
 fileprint=[pathres_Runs 'hs_' num2str(i)];
 print('-dpng','-r200',fileprint)
