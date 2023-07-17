@@ -14,19 +14,19 @@ import numpy as np
 from subprocess import Popen, PIPE
 
 import os, shutil
-nproc = 10
-pathres = 'F:/Adcirc_SWAN/PARTneR2/Test_Runs/Test_04/'
+nproc = 28
+pathres = 'F:/Adcirc_SWAN/PARTneR2/Test_Runs/Test_01/'
 os.chdir(pathres)
-cygfolder = '/cygdrive/f/Adcirc_SWAN/PARTneR2/Test_Runs/Test_04'
+cygfolder = '/cygdrive/f/Adcirc_SWAN/PARTneR2/Test_Runs/Test_01'
 
 
-os.system('C:/cygwin64/bin/bash --login -c "cd %s;  /cygdrive/c/adcirc_v54.02/build/adcprep.exe --np 28 --partmesh"' % cygfolder)
-os.system('C:/cygwin64/bin/bash --login -c "cd %s;  /cygdrive/c/adcirc_v54.02/build/adcprep.exe --np 28 --prepall"' % cygfolder)
-os.system('C:/cygwin64/bin/bash --login -c "cd %s; mpirun --use-hwthread-cpus -np 28 /cygdrive/f/Adcirc_SWAN/PARTneR2/ADCIRC55/ADCIRC55/padcswan_SH_2"' % cygfolder)
-#subprocess.run(['C:/cygwin64/bin/bash --login -c "cd /cygdrive/f/Adcirc_SWAN/PARTneR2/Test_Runs/Test_04; mpirun --use-hwthread-cpus --np 12 /cygdrive/f/Adcirc_SWAN/PARTneR2/ADCIRC55/ADCIRC55/padcswan_SH_2.exe"'])
+os.system('C:/cygwin64/bin/bash --login -c "cd %s;  /cygdrive/c/adcirc_v54.02/build/adcprep.exe --np %s --partmesh"' %(cygfolder,str(nproc)))
+os.system('C:/cygwin64/bin/bash --login -c "cd %s;  /cygdrive/c/adcirc_v54.02/build/adcprep.exe --np %s --prepall"' %(cygfolder,str(nproc)))
+os.system('C:/cygwin64/bin/bash --login -c "cd %s; mpirun --use-hwthread-cpus -np %s /cygdrive/f/Adcirc_SWAN/PARTneR2/ADCIRC55/ADCIRC55/padcswan_SH_2"' %(cygfolder,str(nproc)))
+#subprocess.run(['C:/cygwin64/bin/bash --login -c "cd /cygdrive/f/Adcirc_SWAN/PARTneR2/Test_Runs/Test_01; mpirun --use-hwthread-cpus --np 12 /cygdrive/f/Adcirc_SWAN/PARTneR2/ADCIRC55/ADCIRC55/padcswan_SH_2.exe"'])
 
 
-# os.system('C:/cygwin64/bin/bash --login -c "cd /cygdrive/f/Adcirc_SWAN/PARTneR2/Test_Runs/Test_04; mpirun --use-hwthread-cpus --np 12 /cygdrive/f/Adcirc_SWAN/PARTneR2/ADCIRC55/ADCIRC55/padcswan_SH_2.exe"')
+# os.system('C:/cygwin64/bin/bash --login -c "cd /cygdrive/f/Adcirc_SWAN/PARTneR2/Test_Runs/Test_01; mpirun --use-hwthread-cpus --np 12 /cygdrive/f/Adcirc_SWAN/PARTneR2/ADCIRC55/ADCIRC55/padcswan_SH_2.exe"')
 
 # os.system('C:/cygwin64/bin/bash --login -c "cd %s; mpirun --use-hwthread-cpus -np 16 /home/executables/punswan"' % cygfolder )
 

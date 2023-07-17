@@ -1,8 +1,8 @@
 clear all
-close all
+%close all
 %%
 addpath('F:\Adcirc_SWAN\PARTneR2\Matlab_Codes\Codes')
-pathres_Runs='F:\Adcirc_SWAN\PARTneR2\Test_Runs\Test_02_c\';
+pathres_Runs='F:\Adcirc_SWAN\PARTneR2\Test_Runs\Test_01\';
 
 nc_fl_zeta = [pathres_Runs 'maxele.63.nc'];
 nc_fl_hs = [pathres_Runs 'swan_HS_max.63.nc'];

@@ -26,9 +26,10 @@ for i = 1:length(y)
 end
 Pmin = besttrack.Var10;
 Wind = besttrack.Var9;
-%r_max = 218.3784 - 1.2014*Wind + (Wind./10.9844).^2 - (Wind./35.3052).^3 - (145.5090*cos(deg2rad(lat)));
-%Rmax = r_max;
-Rmax = besttrack.Var20;
+Rmax = 
+r_max = 218.3784 - 1.2014*Wind + (Wind./10.9844).^2 - (Wind./35.3052).^3 - (145.5090*cos(deg2rad(lat)));
+Rmax = r_max;
+%Rmax = besttrack.Var20;
 filename = wind_out;
 HURDATformat_gentrack(time,x,y,Pmin,Wind,Rmax,filename)
 %%
