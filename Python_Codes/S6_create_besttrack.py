@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Jul 18 13:27:04 2023
+Script to turn ibtracs/besttrack files into fort.22 files
+@author: moritzw
+"""
 import os
 import numpy as np
 import pandas as pd
@@ -25,8 +31,6 @@ def get_lat_from_y(y):
 def get_rmax_with_knaff(Wind,lat):
     #Knaff et al. (2016)
     r_max = 218.3784 - 1.2014*Wind + (Wind/10.9844)**2 - (Wind/35.3052)**3 - (145.5090*np.cos(np.deg2rad(lat)))
-    for i in range(len(r_max)):
-        r_max[i]=int(r_max[i])
     return(r_max)
 
 def create_wind_file(wind_out,time,y,x,Wind,Pmin,Rmax):
