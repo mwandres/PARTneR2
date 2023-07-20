@@ -150,6 +150,7 @@ def generate_fort19_file(input_folder,pathres,tide_model_dir):
     
     pbnd_x,pbnd_y = get_x_and_y(grid_in)
     start_time,end_time = get_start_and_end_time_from_besttrack(f22)
+    end_time = end_time + dt.timedelta(hours = 1)
     tide = get_tidal_elevation_matrix(tide_model_dir,start_time,end_time,pbnd_x,pbnd_y)
     create_tide_file(tide_out,start_time,end_time,tide,pbnd_x,pbnd_y)
     return()
