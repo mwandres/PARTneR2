@@ -42,25 +42,25 @@ def create_wind_file(wind_out,time,y,x,Wind,Pmin,Rmax):
             wind_file.write(frmt % (time[i],y[i],x[i],Wind[i],Pmin[i],int(Rmax[i])))
     return()
 
-#########
-wind_in = 'F:/Adcirc_SWAN/PARTneR2/BestTrack/Harold_tonga.csv'
-pathres='F:/Adcirc_SWAN/PARTneR2/Test_Runs/Test_06_all_py/'
-wind_out = pathres +'fort.22'
-#########
+def generate_fort22_file(wind_in,pathres):
+    wind_out = pathres +'fort.22'
+    make_run_folder(pathres)
+    besttrack = pd.read_csv(wind_in,header=None,delimiter=',')
+    
+    time = besttrack[2][:]
+    x = besttrack[7][:]
+    x = correct_x(x)
+    y = besttrack[6]
+    lat = get_lat_from_y(y)
+    
+    Pmin = besttrack[9]
+    Wind = besttrack[8]
+    r_max = get_rmax_with_knaff(Wind,lat)
+    Rmax = r_max
+    create_wind_file(wind_out,time,y,x,Wind,Pmin,Rmax)
+    return()
 
-make_run_folder(pathres)
-besttrack = pd.read_csv(wind_in,header=None,delimiter=',')
-
-time = besttrack[2][:]
-x = besttrack[7][:]
-x = correct_x(x)
-y = besttrack[6]
-lat = get_lat_from_y(y)
-
-Pmin = besttrack[9]
-Wind = besttrack[8]
-r_max = get_rmax_with_knaff(Wind,lat)
-Rmax = r_max
-create_wind_file(wind_out,time,y,x,Wind,Pmin,Rmax)
-
+# wind_in = 'F:/Adcirc_SWAN/PARTneR2/BestTrack/Harold_tonga.csv'
+# pathres='F:/Adcirc_SWAN/PARTneR2/Test_Runs/Test_06_all_py/'
+# generate_fort22_file(wind_in,pathres)
 

@@ -10,6 +10,9 @@ import pyTMD
 from adcircpy import AdcircMesh
 import datetime as dt
 import matplotlib.dates as mdates
+import pandas as pd
+import datetime as dt
+
 ###
 def get_x_and_y(grid_in):
     pmesh = AdcircMesh.open(grid_in,crs=4326)
@@ -63,54 +66,27 @@ def create_tide_file(tide_out,start_time,end_time,tide,pbnd_x,pbnd_y):
             for k in range(len(pbnd_x)):
                 tide_file.write('%4.4f\n' % tide[k,i])
     return()
-###
 
-grid_in = 'F:/Adcirc_SWAN/PARTneR2/Test_Runs/input_files/fort.14'
-pathres='F:/Adcirc_SWAN/PARTneR2/Test_Runs/Test_06_all_py/'
-tide_out = pathres +'fort.19'
-tide_dir = 'F:/Adcirc_SWAN/PARTneR2'
+def generate_fort19_file(grid_in,pathres,tide_model_dir):
+    f22 = pathres +'fort.22'
+    tide_out = pathres +'fort.19'
+    
+    besttrack = pd.read_csv(f22,header=None,delimiter=',')
+    besttrack[2] = besttrack[2].astype(str)
+    # Series of datetime values from Column
+    times = pd.to_datetime(besttrack[2], format='%Y%m%d%H').dt.to_pydatetime()
+    
+    start_time = times[0]   #dt.datetime(2020,4,5,00)
+    end_time = times[-1]    #dt.datetime(2020,4,10,13)
+    
+    pbnd_x,pbnd_y = get_x_and_y(grid_in)
+    tide = get_tidal_elevation_matrix(tide_model_dir,start_time,end_time,pbnd_x,pbnd_y)
+    create_tide_file(tide_out,start_time,end_time,tide,pbnd_x,pbnd_y)
+    return()
 
-start_time = dt.datetime(2020,4,5,00)
-end_time = dt.datetime(2020,4,10,13)
-
-pbnd_x,pbnd_y = get_x_and_y(grid_in)
-tide = get_tidal_elevation_matrix(tide_dir,start_time,end_time,pbnd_x,pbnd_y)
-create_tide_file(tide_out,start_time,end_time,tide,pbnd_x,pbnd_y)
-
-
-
-        
-#         for i=1:length(time);
-#     for k=1:npoints;
-#         fprintf(fileID,'%4.4f\n',[tide(k,i)]);
-# #######
-
-
-# filegrid=[pathres 'fort.14'];%% Grid file
-# [tri,xyz,elebnd,flowbnd]=adcirc_leegrid(filegrid);
-
-# time=[datenum('5-April-2020 00:00:00'):1/24/6:datenum('10-Apr-2020 13:00:00')];
-# bnd=vertcat(elebnd.eles);
-# tide=ones(length(bnd),length(time));
+# grid_in = 'F:/Adcirc_SWAN/PARTneR2/Test_Runs/input_files/fort.14'
+# pathres='F:/Adcirc_SWAN/PARTneR2/Test_Runs/Test_06_all_py/'
+# tide_model_dir = 'F:/Adcirc_SWAN/PARTneR2'
+# generate_fort19_file(grid_in,pathres,tide_model_dir)
 
 
-# for i=1:length(bnd)
-#     lon=xyz(bnd(i),2);
-#     lat=xyz(bnd(i),3);
-#     dates=[min(time):1/24/6:max(time)];
-#     [z,conList]=tmd_tide_pred('C:\Users\moritzw\OneDrive - SPC\Documents\MATLAB\TMD_Matlab_Toolbox_v2.5\TMD_Matlab_Toolbox_v2.5\TMD\DATA\Model_atlas',dates,lat,lon,'z');
-#     tide(i,:)=z;
-# end
-
-# filename=[pathres 'fort.19'];
-# name='TPOX8';
-# fileID = fopen(filename,'w');
-# npoints=length(bnd);
-# fprintf(fileID,'%i\n',[600]);
-
-# for i=1:length(time);
-#     for k=1:npoints;
-#         fprintf(fileID,'%4.4f\n',[tide(k,i)]);
-#     end
-# end
-# fclose(fileID);
