@@ -24,7 +24,7 @@ mannings_n_at_sea_floor
 0  	 	 ! statim 
 0   	 	 ! reftim 
 YYYY MM DD HH 1 0.9 3600
-2.5            	 	          ! rnday - total length of simulation (in days)11.25 
+DELTA_IN_DAYS            	 	          ! rnday - total length of simulation (in days)11.25 
 1  	 	 ! dramp 
 0 1 0   	  ! a00, b00, c00 
 0.1 0 0 0.01    	 ! h0, 2*dummy, velmin 

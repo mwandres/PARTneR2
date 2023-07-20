@@ -168,6 +168,8 @@ def change_dates_and_copy_f26(input_folder,pathres,start_time,end_time):
     return()
 
 def change_dates_and_copy_f15(input_folder,pathres,start_time,end_time):
+    #pathres='F:/Adcirc_SWAN/PARTneR2/Test_Runs/Test_06_all_py/'
+    #input_folder = 'F:/Adcirc_SWAN/PARTneR2/Test_Runs/input_files/'
     with open(input_folder+"fort.15", 'r') as f:
                             filedata = f.read()
                         
@@ -175,11 +177,14 @@ def change_dates_and_copy_f15(input_folder,pathres,start_time,end_time):
     MM = start_time.strftime('%m')
     DD = start_time.strftime('%d')
     HH = start_time.strftime('%H')
-    
+    delta = end_time - start_time
+    DELTA_IN_DAYS = delta.days + delta.seconds/3600/24
     filedata = filedata.replace('YYYY', YYYY)
     filedata = filedata.replace('MM', MM)
     filedata = filedata.replace('DD', DD)
     filedata = filedata.replace('HH', HH)
+    filedata = filedata.replace('DELTA_IN_DAYS', str(DELTA_IN_DAYS))
+    
     with open(pathres+"fort.15", 'w') as fout:
             fout.write(filedata)
     return()

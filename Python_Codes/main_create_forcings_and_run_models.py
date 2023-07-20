@@ -6,6 +6,7 @@ Created on Thu Jul 20 09:36:04 2023
 """
 from make_forcings import generate_fort22_file, generate_fort19_file, copy_remaining_forcing_files_and_change_dates
 from run_model import run_model
+from process_output import store_output_at_point_locations
 
 pathres='F:/Adcirc_SWAN/PARTneR2/Test_Runs/Harold_Test/'
 cygfolder = '/cygdrive/f/Adcirc_SWAN/PARTneR2/Test_Runs/Harold_Test'
@@ -14,10 +15,14 @@ wind_in = 'F:/Adcirc_SWAN/PARTneR2/BestTrack/Harold_tonga.csv'
 nproc = 28
 
 #####
-input_folder = 'F:/Adcirc_SWAN/PARTneR2/Test_Runs/input_files/'
+input_folder = 'F:/Adcirc_SWAN/PARTneR2/input_files/'
 tide_model_dir = 'F:/Adcirc_SWAN/PARTneR2'
+output_locations_csv = input_folder + 'TO.csv'
+#####
 
 generate_fort22_file(wind_in,pathres)
 generate_fort19_file(input_folder,pathres,tide_model_dir)
 copy_remaining_forcing_files_and_change_dates(input_folder,pathres)
-#run_model(nproc,pathres,cygfolder)
+run_model(nproc,pathres,cygfolder)
+
+store_output_at_point_locations(pathres,input_folder,output_locations_csv)
