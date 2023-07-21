@@ -9,8 +9,11 @@ import numpy as np
 import pandas as pd
 import netCDF4
 import math
-import geopy.distance
 from joblib import Parallel, delayed
+import adcircpy
+import matplotlib.tri as tri
+from matplotlib import pyplot as plt
+import cartopy.crs as ccrs
 
 def make_results_folder(pathres):
     if not os.path.exists(pathres + '/results'):
@@ -81,4 +84,55 @@ def store_output_at_point_locations(pathres,input_folder,output_locations_csv):
     make_results_folder(pathres)
     df = pd.DataFrame({"lon": target_lon, "lat": target_lat, "zeta_max": zeta_output, "hs_max": hs_output})
     df.to_csv(pathres + '/results/output.csv',index=False)
+    return()
+
+# def plot_unswan(lon,lat,z,title,cbarlabel,vmin,vmax,cmap):
+#     triang = tri.Triangulation(lon, lat)
+#     f = plt.figure()
+#     levels = np.linspace(vmin, vmax, 91)
+#     plt.tricontourf(triang,z,levels=levels, cmap=cmap)
+#     plt.title(title)
+#     cb = plt.colorbar()
+#     cb.set_label(cbarlabel)
+#     plt.show(block=False)
+#     ax = plt.gca()
+#     return(f,ax)
+
+
+def plot_unswan(lon,lat,z,title,cbarlabel,levels,cmap):
+    triang = tri.Triangulation(lon, lat)
+    fig = plt.figure(figsize=(12, 8))
+    img_extent = (np.min(lon),np.max(lon),np.min(lat),np.max(lat))
+    
+    proj = ccrs.PlateCarree(central_longitude=180)
+    ax = plt.axes(projection=proj)
+    
+    ax.set_extent(img_extent,crs=ccrs.PlateCarree())
+
+    plt.title(title)
+    ax.use_sticky_edges = False    
+    # set a margin around the data
+    ax.set_xmargin(0.05)
+    ax.set_ymargin(0.10)
+    
+    im = ax.tricontourf(triang, z, levels=levels, cmap=cmap, transform=ccrs.PlateCarree())
+    #im = ax.tricontourf(triang, z, cmap=cmap, transform=ccrs.PlateCarree())
+
+    ax.coastlines(resolution='50m', color='black', linewidth=1)
+    ax.gridlines(crs=ccrs.PlateCarree(central_longitude=180), draw_labels=True,
+                      linewidth=2, color='gray', alpha=0.5, linestyle='--')
+    cb = fig.colorbar(im)
+    cb.set_label(cbarlabel)
+    return(fig,ax)
+
+def plot_and_save_figures(pathres):
+    lon,lat,zeta_max,hs_max = load_zeta_and_hs_max(pathres)
+    levels = np.linspace(min(zeta_max), max(zeta_max), 91)
+    fig,ax = plot_unswan(lon,lat,zeta_max,'zeta_max','zeta_max',levels,"gist_ncar")
+    plt.savefig(pathres+'results/zeta_max.png')
+    plt.close(fig)
+    levels = np.linspace(0, 12, 91)
+    fig,ax = plot_unswan(lon,lat,hs_max,'hs_max','hs_max',levels,"gist_ncar")
+    plt.savefig(pathres+'results/hs_max.png')
+    plt.close(fig)
     return()

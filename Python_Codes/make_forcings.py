@@ -35,9 +35,11 @@ def correct_x(x):
     return(x)
 
 def get_lat_from_y(y):
-    lat = y.copy()    
-    for i in range(len(lat)):
-        lat = lat.replace(lat[i][:], int(lat[i][0:-1])/10)
+    #lat = y.copy()
+    lat = np.zeros(np.shape(y))
+    for i in range(len(y)):
+        #lat = lat.replace(lat[i][:], int(lat[i][0:-1])/10)
+        lat[i] = int(y[i][0:-1])/10
     return(lat)
 
 def get_rmax_with_knaff(Wind,lat):
