@@ -72,7 +72,7 @@ def get_zeta_and_hs_at_point_locations(zeta_max,hs_max,posix):
         hs_output[i] = hs_max[posix[i]]
     return(zeta_output,hs_output)
 
-def store_output_at_point_locations(pathres,input_folder,output_locations_csv):
+def store_output_at_point_locations(pathres,input_folder,output_locations_csv,outfilename):
 # pathres='F:/Adcirc_SWAN/PARTneR2/Test_Runs/Harold_Test/'
 # input_folder = 'F:/Adcirc_SWAN/PARTneR2/input_files/'
 # output_locations_csv = input_folder + 'TO.csv'
@@ -83,7 +83,7 @@ def store_output_at_point_locations(pathres,input_folder,output_locations_csv):
     zeta_output,hs_output = get_zeta_and_hs_at_point_locations(zeta_max,hs_max,posix)
     make_results_folder(pathres)
     df = pd.DataFrame({"lon": target_lon, "lat": target_lat, "zeta_max": zeta_output, "hs_max": hs_output})
-    df.to_csv(pathres + '/results/output.csv',index=False)
+    df.to_csv(pathres + '/results/'+outfilename,index=False)
     return()
 
 # def plot_unswan(lon,lat,z,title,cbarlabel,vmin,vmax,cmap):
@@ -131,7 +131,7 @@ def plot_and_save_figures(pathres):
     fig,ax = plot_unswan(lon,lat,zeta_max,'zeta_max','zeta_max',levels,"gist_ncar")
     plt.savefig(pathres+'results/zeta_max.png')
     plt.close(fig)
-    levels = np.linspace(0, 12, 91)
+    levels = np.linspace(min(hs_max), max(hs_max), 91)
     fig,ax = plot_unswan(lon,lat,hs_max,'hs_max','hs_max',levels,"gist_ncar")
     plt.savefig(pathres+'results/hs_max.png')
     plt.close(fig)

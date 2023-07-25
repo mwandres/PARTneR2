@@ -129,6 +129,7 @@ env.bak/
 venv.bak/
 Test_Runs/
 TPXO8
+Grids/
 
 # Spyder project settings
 .spyderproject
