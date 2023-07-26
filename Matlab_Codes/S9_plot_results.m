@@ -2,7 +2,7 @@ clear all
 %close all
 %%
 addpath('F:\Adcirc_SWAN\PARTneR2\Matlab_Codes\Codes')
-pathres_Runs='F:\Adcirc_SWAN\PARTneR2\Test_Runs\Harold_Test\';
+pathres_Runs='F:\Adcirc_SWAN\PARTneR2\Test_Runs\Rene_Test_SATO\';
 
 nc_fl_zeta = [pathres_Runs 'maxele.63.nc'];
 nc_fl_hs = [pathres_Runs 'swan_HS_max.63.nc'];
@@ -30,8 +30,8 @@ cmap = flipud(cbrewer('div','RdYlBu',[23]));
 colormap(cmap)
 c = colorbar;
 ylabel(c,'Zeta_{max} (m)')
-fileprint=[pathres_Runs 'zeta_max'];
-print('-dpng','-r200',fileprint)
+% fileprint=[pathres_Runs 'zeta_max'];
+% print('-dpng','-r200',fileprint)
 
 fsz = 12; % default font size
 bgc = [1 1 1]; % default background color
@@ -49,6 +49,6 @@ cmap = flipud(cbrewer('div','RdYlBu',[23]));
 colormap(cmap)
 c = colorbar;
 ylabel(c,'Hs_{max} (m)')
-fileprint=[pathres_Runs 'hs_max'];
-print('-dpng','-r200',fileprint)
+% fileprint=[pathres_Runs 'hs_max'];
+% print('-dpng','-r200',fileprint)
 
