@@ -155,12 +155,13 @@ def plot_unswan(lon,lat,z,title,cbarlabel,levels,cmap,pathres):
     ax.set_xmargin(0.05)
     ax.set_ymargin(0.10)
     
-    im = ax.tricontourf(triang, z, levels=levels, cmap=cmap, transform=ccrs.PlateCarree())
+    #im = ax.tricontourf(triang, z, cmap='turbo', transform=ccrs.PlateCarree())
+    im = ax.tripcolor(triang, z, cmap='turbo', transform=ccrs.PlateCarree())
 
     ax.coastlines(resolution='50m', color='black', linewidth=1)
     ax.gridlines(crs=ccrs.PlateCarree(central_longitude=180), draw_labels=True,
                       linewidth=2, color='gray', alpha=0.5, linestyle='--')
-    cb = fig.colorbar(im)
+    cb = fig.colorbar(im,extend="both")
     cb.set_label(cbarlabel)
     return(fig,ax)
 
