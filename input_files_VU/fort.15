@@ -1,0 +1,71 @@
+oceanmesh2d
+Tonga_mesh
+1                                        ! NFOVER - NONFATAL ERROR OVERRIDE OPTION
+0                                        ! NABOUT - ABREVIATED OUTPUT OPTION PARAMETER
+1                                        ! NSCREEN - OUTPUT TO UNIT 6 PARAMETER
+0                                        ! IHOT - HOT START OPTION PARAMETER
+2                                        ! ICS - COORDINATE SYSTEM OPTION PARAMETER
+511112                                        ! IM - MODEL RUN TYPE: 0,10,20,30 = 2DDI, 1,11,21,31 = 3D(VS), 2 = 3D(DSS)
+1                                        ! NOLIBF - NONLINEAR BOTTOM FRICTION OPTION
+2                                        ! NOLIFA - OPTION TO INCLUDE FINITE AMPLITUDE TERMS
+0                                        ! NOLICA - OPTION TO INCLUDE CONVECTIVE ACCELERATION TERMS
+0                                        ! NOLICAT - OPTION TO CONSIDER TIME DERIVATIVE OF CONV ACC TERMS
+3           	 ! nwp 
+primitive_weighting_in_continuity_equation
+advection_state
+quadratic_friction_coefficient_at_sea_floor
+1   	 	 ! ncor 
+0   	 	 ! ntip 
+308  	 	 ! nws 
+1    	 	 ! nramp 
+9.810000    	 ! g  
+-3   	 	 ! tau0 
+1	 	 ! dtdp 
+0  	 	 ! statim 
+0   	 	 ! reftim 
+YYYY MM DD HH 1 0.9 3600
+DELTA_IN_DAYS            	 	          ! rnday - total length of simulation (in days)11.25 
+1  	 	 ! dramp 
+0 1 0   	  ! a00, b00, c00 
+0.1 0 0 0.01    	 ! h0, 2*dummy, velmin 
+165.3 -17.1  	 	 ! SLAM0, SFEA0 
+0.00250       ! cf 
+-0.050000       ! elsm 
+0.0001000       ! cori 
+0   	 	 ! NTIF 
+0   	 	 ! NBFR 
+90                                       ! anginn - minimum angle for tangential flow
+0 0.000000 0.000000 0                    ! noute, toutse, toutfe, nspoole - fort 61 options
+0                                        ! nstae - number of elevation recording stations, followed by locations on proceeding lines
+0 0.000000 100 10                        ! noutv, toutsv, toutfv, nspoolv - fort 62 options
+0                                        ! nstav - number of velocity recording stations, followed by locations on proceeding lines
+0 0.000000 0.000000 0                    ! noutm, toutsm, toutfm, nspoolm - meteorolocial output info
+0                                        ! nstam - number of meteorological recording stations, followed by locations on proceeding lines
+3 0.000000 100.000000 3600               ! noutge, toutsge, toutfge, nspoolge - global elevation output info (unit 63)
+3 0.000000 100.000000 3600               ! noutgv, toutsgv, toutfgv, nspoolgv - global velocity output info (unit 64)
+3 0.000000 100.000000 3600                 ! noutgm,toutsgm,toutfgm,nspoolgm  - global meteorological output info (unit 73/74)
+0                                        ! nharf - number of freqencies in harmonic analysis
+0.000000 0.000000 0 0.000000             ! thas,thaf,nhainc,fmv - harmonic analysis parameters
+0 0 0 0                                  ! nhase,nhasv,nhage,nhagv - control harmonic analysis and output to units 51,52,53,54
+0 1800                                   ! nhstar,nhsinc - hot start file generation parameters
+0 0 1e-010 50                            ! ititer, isldia, convcr, itmax - algebraic solution parameters
+&timebathycontrol  !nddt, btiminc, bchgtiminc -- bathymetry time records (in seconds) and transition time
+    nddt = 0
+    btiminc = 0
+    bchgtiminc = 43200
+/
+&metcontrol
+     winddraglimit=   2.0000000000000000e-003 ,
+     draglawstring='garratt',
+     rhoair=   1.1499999999999999
+     invertedBarometerOnElevationBoundary= f 
+/
+&swanoutputcontrol
+ swan_outpuths=t,
+ swan_outputdir=t,
+ swan_outputtm01=f,
+ swan_outputtps=t,
+ swan_outputwind=f,
+ swan_outputtm02=t,
+ swan_outputtmm10=f,
+/

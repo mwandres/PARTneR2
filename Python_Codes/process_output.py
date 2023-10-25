@@ -194,10 +194,12 @@ def plot_merrifield(pathres,outfilename,out_fig_name):
 def plot_and_save_figures(pathres):
     lon,lat,zeta_max,hs_max,zeta,hs,tp = load_zeta_and_hs_max(pathres)
     levels = np.linspace(min(zeta_max), max(zeta_max), 91)
+    #levels = np.linspace(0,4, 91)
     fig,ax = plot_unswan(lon,lat,zeta_max,'zeta_max','zeta_max',levels,"gist_ncar",pathres)
     plt.savefig(pathres+'results/zeta_max.png')
     plt.close(fig)
     levels = np.linspace(min(hs_max), max(hs_max), 91)
+    #levels = np.linspace(0,8, 91)
     fig,ax = plot_unswan(lon,lat,hs_max,'hs_max','hs_max',levels,"gist_ncar",pathres)
     plt.savefig(pathres+'results/hs_max.png')
     plt.close(fig)

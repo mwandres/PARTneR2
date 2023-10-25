@@ -50,7 +50,7 @@ def get_rmax_with_knaff(Wind,lat):
 def create_wind_file(wind_out,time,y,x,Wind,Pmin,Rmax):
     if os.path.exists(wind_out):
         os.remove(wind_out)
-    frmt='SH, 01,%11s,   , BEST,   0,%4s,%5s,%4s,%5s,   ,    ,    ,     ,     ,     ,     , 1013,     ,%4s,    ,    ,    ,    ,    ,    ,    ,     Unnamed,  ,   ,    ,    ,    ,    ,   0\n'
+    frmt='SH, 01,%11s,   , BEST,   0,%5s,%6s,%4s,%5s,   ,    ,    ,     ,     ,     ,     , 1013,     ,%4s,    ,    ,    ,    ,    ,    ,    ,     Unnamed,  ,   ,    ,    ,    ,    ,   0\n'
     with open(wind_out,'a') as wind_file:
         for i in range(len(time)):
             wind_file.write(frmt % (time[i],y[i],x[i],Wind[i],Pmin[i],int(Rmax[i])))
